@@ -1,0 +1,5 @@
+{
+  "name": "حرفي عين صالح",
+  "description": "A web application to connect clients with local artisans and craftsmen in In Salah. Users can select a role as a client to request services or as an artisan to offer their skills. Service requests can be sent directly via WhatsApp.",
+  "requestFramePermissions": []
+}
