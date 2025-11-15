@@ -1,4 +1,3 @@
-import React from 'react';
 import { ServiceCategory } from './types';
 
 export const WHATSAPP_NUMBER = "213661379535";

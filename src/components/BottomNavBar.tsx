@@ -12,7 +12,7 @@ const BottomNavBar: React.FC<BottomNavBarProps> = ({ role, badgeCount = 0 }) => 
     const location = useLocation();
 
     const navItems = [
-        { path: '/home', label: 'الرئيسية', icon: IconHome },
+        { path: '/', label: 'الرئيسية', icon: IconHome },
         { path: '/requests', label: role === UserRole.CLIENT ? 'طلباتي' : 'الواردة', icon: IconList },
         ...(role === UserRole.CLIENT ? [{ path: '/artisans', label: 'الحرفيون', icon: IconBuild }] : []),
         { path: '/profile', label: 'حسابي', icon: IconPerson },

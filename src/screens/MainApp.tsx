@@ -20,7 +20,7 @@ interface MainAppProps {
     role: UserRole;
 }
 
-const CURRENT_ARTISAN = { id: "2", skill: "سباكة" }; // Simplified for demo logic
+const CURRENT_ARTISAN = { id: "2", skill: "سباكة / ماء" }; // Simplified for demo logic
 
 const MainApp: React.FC<MainAppProps> = ({ role }) => {
     const [artisans, setArtisans] = useState<Artisan[]>([]);
@@ -168,7 +168,7 @@ const MainApp: React.FC<MainAppProps> = ({ role }) => {
                 <main className="h-full">
                     <Routes>
                         <Route
-                            path="/home"
+                            path="/"
                             element={role === UserRole.CLIENT
                                 ? <ClientHomeScreen artisans={artisansWithRatings} categories={CATEGORIES} />
                                 : <ArtisanHomeScreen requests={artisanRequests} artisans={artisansWithRatings} />
@@ -212,7 +212,7 @@ const MainApp: React.FC<MainAppProps> = ({ role }) => {
                             />
                            </>
                         )}
-                        <Route path="*" element={<Navigate to="/home" replace />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </main>
                 <BottomNavBar role={role} badgeCount={newArtisanRequestsCount} />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ServiceRequest, RequestStatus, Review, Artisan } from '../../types';
+import { ServiceRequest, RequestStatus, Review } from '../../types';
 import { IconList } from '../../components/icons';
 import ReviewModal from '../../components/ReviewModal';
 
@@ -51,7 +51,9 @@ const RequestsScreen: React.FC<RequestsScreenProps> = ({ requests, onUpdateReque
         setSelectedRequest(null);
     };
 
-    if (requests.length === 0) {
+    const clientRequests = requests.slice().reverse();
+
+    if (clientRequests.length === 0) {
         return (
             <div className="relative flex flex-col items-center justify-center h-[calc(100vh-10rem)] text-center p-6 overflow-hidden">
                 <IconList className="absolute text-gray-200 opacity-50 w-48 h-48 -z-0" />
@@ -65,7 +67,7 @@ const RequestsScreen: React.FC<RequestsScreenProps> = ({ requests, onUpdateReque
         <>
             <div className="p-4 space-y-4 pb-24">
                 <h1 className="text-2xl font-bold text-brand-on-surface">طلباتي</h1>
-                {requests.slice().reverse().map((req) => (
+                {clientRequests.map((req) => (
                     <div key={req.id} className="bg-brand-surface p-4 rounded-xl shadow-md">
                         <h3 className="font-bold text-brand-on-surface">{req.categoryName}</h3>
                         <p className="text-sm text-gray-600 mt-1">الحي: {req.neighborhood}</p>

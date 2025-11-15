@@ -34,7 +34,6 @@ const RequestServiceScreen: React.FC<RequestServiceScreenProps> = ({ categories,
     
     const generateTags = async (problemDescription: string): Promise<string> => {
         try {
-            // Call our secure Netlify function
             const response = await fetch('/.netlify/functions/gemini', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -44,13 +43,15 @@ const RequestServiceScreen: React.FC<RequestServiceScreenProps> = ({ categories,
                 }),
             });
             if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Error from server:', errorData);
                 throw new Error('Failed to generate tags');
             }
             const data = await response.json();
-            return data.text.trim();
+            return data.text ? data.text.trim() : "";
         } catch (error) {
             console.error("Error generating tags:", error);
-            return ""; // Return empty string on error
+            return ""; 
         }
     };
 
@@ -61,7 +62,6 @@ const RequestServiceScreen: React.FC<RequestServiceScreenProps> = ({ categories,
         setIsSubmitting(true);
         const catName = selectedCategory?.name ?? "غير محدد";
 
-        // AI generates tags via our secure function
         const ai_tags = await generateTags(description);
 
         const newRequest: ServiceRequest = {
@@ -104,7 +104,7 @@ ${description}
             <header className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-bold text-brand-on-surface">طلب خدمة جديدة</h1>
                 <button onClick={() => navigate(-1)} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
-                    <IconChevronRight className="w-6 h-6 text-gray-700" />
+                    <IconChevronRight className="w-6 h-6 text-gray-700 transform -rotate-180" />
                 </button>
             </header>
             
